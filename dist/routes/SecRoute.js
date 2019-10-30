@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Router_1 = require("../commons/Router");
-class FirstRoute extends Router_1.Router {
+class SecondtRoute extends Router_1.Router {
     applyRoutes(server) {
         server.get('/second', (req, resp, next) => {
             resp.json(200, 'get all ok');
@@ -13,4 +13,4 @@ class FirstRoute extends Router_1.Router {
         });
     }
 }
-exports.firstRoute = new FirstRoute();
+exports.secondRoute = new SecondtRoute();

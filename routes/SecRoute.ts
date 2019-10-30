@@ -2,7 +2,7 @@ import {Server} from 'restify'
 import {Router} from '../commons/Router'
 
 
-class FirstRoute extends Router{
+class SecondtRoute extends Router{
     applyRoutes(server: Server){
         server.get('/second', (req, resp, next)=>{
                 resp.json(200,'get all ok')
@@ -15,5 +15,5 @@ class FirstRoute extends Router{
     }
 }
 
-export const firstRoute = new FirstRoute();
+export const secondRoute = new SecondtRoute();
 
