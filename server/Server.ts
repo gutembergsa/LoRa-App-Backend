@@ -32,7 +32,7 @@ class Backend{
 
     private initDb(): Promise<typeof mongoose>{
         console.log(typeof mongoose)
-        return mongoose.connect('mongodb://localhost/LoraTopics',{
+        return mongoose.connect('mongodb://heroku_900519pp:6ucf4cim2m2qvip1i3oegj3q3m@ds141168.mlab.com:41168/heroku_900519pp',{
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
