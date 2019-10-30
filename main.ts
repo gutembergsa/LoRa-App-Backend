@@ -5,7 +5,6 @@ import {secondRoute} from './routes/SecRoute'
 import {temperatureTopic} from './topics/TemperatureTopic'
 import {statusTopic} from './topics/StatusTopic'
 
-
 appBackend.exposeServer([firstRoute, secondRoute]).then(server => {
     console.log(`Servidor conectado`)
 }).catch((erro)=> console.log(`erro: ${erro}`))
