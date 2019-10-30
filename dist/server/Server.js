@@ -19,7 +19,7 @@ class Backend {
         }
     }
     initDb() {
-        return mongoose.connect('mongodb://heroku_900519pp:6ucf4cim2m2qvip1i3oegj3q3m@ds141168.mlab.com:41168/heroku_900519pp', {
+        return mongoose.connect(EnvironmentData_1.environment.db.url, {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
