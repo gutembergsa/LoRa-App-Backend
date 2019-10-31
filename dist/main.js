@@ -7,9 +7,9 @@ const TemperatureTopic_1 = require("./topics/TemperatureTopic");
 const StatusTopic_1 = require("./topics/StatusTopic");
 Server_1.appBackend.exposeServer([FirstRoute_1.firstRoute, SecRoute_1.secondRoute]).then(server => {
     console.log(`Servidor conectado`);
-}).catch((erro) => console.log(`erro: ${erro}`));
-Server_1.appBackend.exposeBroker().then(broker => {
-    console.log(`Broker conectado ${broker}`);
-    TemperatureTopic_1.temperatureTopic.subscribe(broker);
-    StatusTopic_1.statusTopic.subscribe(broker);
+    Server_1.appBackend.exposeBroker().then(broker => {
+        console.log(`Broker conectado ${broker}`);
+        TemperatureTopic_1.temperatureTopic.subscribe(broker);
+        StatusTopic_1.statusTopic.subscribe(broker);
+    }).catch((erro) => console.log(`erro: ${erro}`));
 }).catch((erro) => console.log(`erro: ${erro}`));

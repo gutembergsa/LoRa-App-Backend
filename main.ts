@@ -7,14 +7,13 @@ import {statusTopic} from './topics/StatusTopic'
 
 appBackend.exposeServer([firstRoute, secondRoute]).then(server => {
     console.log(`Servidor conectado`)
+    appBackend.exposeBroker().then(broker => {
+        console.log(`Broker conectado ${broker}`)
+        temperatureTopic.subscribe(broker)
+        statusTopic.subscribe(broker)
+    }).catch((erro)=> console.log(`erro: ${erro}`))
 }).catch((erro)=> console.log(`erro: ${erro}`))
 
-
-appBackend.exposeBroker().then(broker => {
-    console.log(`Broker conectado ${broker}`)
-    temperatureTopic.subscribe(broker)
-    statusTopic.subscribe(broker)
-}).catch((erro)=> console.log(`erro: ${erro}`))
 
 
 
