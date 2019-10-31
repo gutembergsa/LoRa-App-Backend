@@ -27,7 +27,7 @@ exports.callbacks = {
         nodePacket.value = payload.toString();
         nodePacket.latency = payload.toString();
         nodePacket.save().then(() => {
-            console.log(`Pub salva: ${nodePacket}`);
+            console.log(`Pub salva: ${nodePacket.hour} ${nodePacket.date}`);
         });
     }
 };
