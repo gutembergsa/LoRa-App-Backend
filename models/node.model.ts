@@ -1,18 +1,18 @@
 import * as mongoose from 'mongoose'
 
 interface nodeInterface extends mongoose.Document {
-    value: number,
-    latency:number,
+    value: string,
+    latency:string,
     date: string,
     hour: string
 }
 
 const nodeSchema = new mongoose.Schema({
     value: {
-        type: Number
+        type: String
     },
     latency:{
-        type: Number
+        type: String
     },
     date:{
         type : String,

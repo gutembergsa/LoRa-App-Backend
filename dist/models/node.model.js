@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
 const nodeSchema = new mongoose.Schema({
     value: {
-        type: Number
+        type: String
     },
     latency: {
-        type: Number
+        type: String
     },
     date: {
         type: String,

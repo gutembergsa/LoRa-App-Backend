@@ -15,7 +15,8 @@ appBackend.exposeBroker().then(broker => {
 }).catch((erro)=> console.log(`erro: ${erro}`))
 
 temperatureTopic.subscribe(appBackend.broker)
-temperatureTopic.publish(appBackend.broker, '100')
+statusTopic.subscribe(appBackend.broker)
+
 
 
 
