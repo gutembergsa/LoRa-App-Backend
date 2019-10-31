@@ -6,18 +6,6 @@ const mongoose = require("mongoose");
 const EnvironmentData_1 = require("../commons/EnvironmentData");
 const StatusDisconnectCallback = () => console.log(`Desconectado: ${__filename}`);
 class Backend {
-    initBroker2() {
-        try {
-            this.broker = mqtt.connect(EnvironmentData_1.environment.broker.url);
-            this.broker.on('connect', () => {
-                console.log(`Broker conectado: ${this.broker.connected}`);
-            });
-            return this.broker;
-        }
-        catch (error) {
-            throw new Error(error);
-        }
-    }
     initDb() {
         return mongoose.connect(EnvironmentData_1.environment.db.url, {
             useNewUrlParser: true,

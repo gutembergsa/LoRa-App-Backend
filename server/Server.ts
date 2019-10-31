@@ -1,12 +1,9 @@
 import * as restify from 'restify'
 import * as mqtt from 'mqtt'
 import * as mongoose from 'mongoose'
+
 import {Router} from '../commons/Router'
 import {environment} from '../commons/EnvironmentData'
-import { reject } from 'q'
-
-import {temperatureTopic} from '../topics/TemperatureTopic'
-import {statusTopic} from '../topics/StatusTopic'
 
 const StatusDisconnectCallback: mqtt.CloseCallback = () => console.log(`Desconectado: ${__filename}`)
 
@@ -14,21 +11,6 @@ class Backend{
 
     server: restify.Server
     broker: mqtt.MqttClient
-
-    private initBroker2(): mqtt.MqttClient{
-        try {
-            this.broker = mqtt.connect(environment.broker.url)
-
-            this.broker.on('connect', () => {
-                console.log(`Broker conectado: ${this.broker.connected}`)
-            })
-
-            return this.broker;
-
-        } catch (error) {
-            throw new Error(error)
-        }
-    }
 
     private initDb(): Promise<typeof mongoose>{
         return mongoose.connect(environment.db.url,{
