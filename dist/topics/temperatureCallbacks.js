@@ -24,9 +24,10 @@ exports.callbacks = {
         let dateAux = new Date();
         let pld = payload.toString().split('|');
         nodePacket.date = dateAux.getDate() + "-" + (dateAux.getMonth() + 1) + "-" + dateAux.getFullYear();
-        nodePacket.hour = (dateAux.getHours() + 3) + ":" + dateAux.getMinutes();
+        nodePacket.hour = (dateAux.getHours()) + ":" + dateAux.getMinutes();
         nodePacket.value = pld[0];
         nodePacket.latency = pld[1];
+        console.log(`${nodePacket}`);
         nodePacket.save().then(() => {
             console.log(`Pub salva: ${topic}`);
         });
