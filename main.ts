@@ -12,10 +12,9 @@ appBackend.exposeServer([firstRoute, secondRoute]).then(server => {
 
 appBackend.exposeBroker().then(broker => {
     console.log(`Broker conectado ${broker}`)
+    temperatureTopic.subscribe(broker)
+    statusTopic.subscribe(broker)
 }).catch((erro)=> console.log(`erro: ${erro}`))
-
-temperatureTopic.subscribe(appBackend.broker)
-statusTopic.subscribe(appBackend.broker)
 
 
 
