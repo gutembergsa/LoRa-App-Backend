@@ -13,12 +13,14 @@
     "@types/mongoose": "^5.5.23",
     "@types/mqtt": "^2.5.0",
     "@types/node": "^12.11.5",
-    "@types/restify": "^8.4.0"
+    "@types/restify": "^8.4.0",
+    "@types/restify-cors-middleware": "^1.0.1"
   },
   "dependencies": {
     "mongoose": "^5.7.7",
     "mqtt": "^3.0.0",
     "newrelic": "^6.0.0",
-    "restify": "^8.4.0"
+    "restify": "^8.4.0",
+    "restify-cors-middleware": "^1.1.1"
   }
 }

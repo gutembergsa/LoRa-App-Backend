@@ -3,9 +3,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const restify = require("restify");
 const mqtt = require("mqtt");
 const mongoose = require("mongoose");
+const corsRestify = require("restify-cors-middleware");
 const EnvironmentData_1 = require("../commons/EnvironmentData");
 const StatusDisconnectCallback = () => console.log(`Desconectado: ${__filename}`);
 class Backend {
+    constructor() {
+        this.cors = corsRestify({
+            origins: ["*"],
+            allowHeaders: ["Authorization"],
+            exposeHeaders: ["Authorization"]
+        });
+    }
     initDb() {
         return mongoose.connect(EnvironmentData_1.environment.db.url, {
             useNewUrlParser: true,
@@ -32,6 +40,8 @@ class Backend {
                     name: EnvironmentData_1.environment.server.name,
                     version: EnvironmentData_1.environment.server.version
                 });
+                this.server.pre(this.cors.preflight);
+                this.server.use(this.cors.actual);
                 this.server.use(restify.plugins.queryParser());
                 this.server.use(restify.plugins.bodyParser());
                 for (let route of routes) {

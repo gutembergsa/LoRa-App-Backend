@@ -1,6 +1,8 @@
 import * as restify from 'restify'
 import * as mqtt from 'mqtt'
 import * as mongoose from 'mongoose'
+import * as corsRestify from "restify-cors-middleware";  
+
 
 import {Router} from '../commons/Router'
 import {environment} from '../commons/EnvironmentData'
@@ -11,6 +13,12 @@ class Backend{
 
     server: restify.Server
     broker: mqtt.MqttClient
+
+    private cors: corsRestify.CorsMiddleware = corsRestify({  
+        origins: ["*"],
+        allowHeaders: ["Authorization"],
+        exposeHeaders: ["Authorization"]
+    });
 
     private initDb(): Promise<typeof mongoose>{
         return mongoose.connect(environment.db.url,{
@@ -42,9 +50,10 @@ class Backend{
                     version: environment.server.version
                 });
 
+                this.server.pre(this.cors.preflight);  
+                this.server.use(this.cors.actual); 
                 this.server.use(restify.plugins.queryParser());
                 this.server.use(restify.plugins.bodyParser());
-
                 for (let route of routes) {
                     route.applyRoutes(this.server)                    
                 }
