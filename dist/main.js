@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+require('newrelic');
 const Server_1 = require("./server/Server");
 const FirstRoute_1 = require("./routes/FirstRoute");
 const TemperatureTopic_1 = require("./topics/TemperatureTopic");

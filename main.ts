@@ -1,3 +1,5 @@
+require('newrelic');
+
 import {appBackend} from './server/Server'
 import {firstRoute} from './routes/FirstRoute'
 
