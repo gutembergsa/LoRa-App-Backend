@@ -10,8 +10,8 @@ class Backend {
     constructor() {
         this.cors = corsRestify({
             origins: ["*"],
-            allowHeaders: ["Authorization"],
-            exposeHeaders: ["Authorization"]
+            allowHeaders: ["*"],
+            exposeHeaders: ["*"]
         });
     }
     initDb() {

@@ -16,8 +16,8 @@ class Backend{
 
     private cors: corsRestify.CorsMiddleware = corsRestify({  
         origins: ["*"],
-        allowHeaders: ["Authorization"],
-        exposeHeaders: ["Authorization"]
+        allowHeaders: ["*"],
+        exposeHeaders: ["*"]
     });
 
     private initDb(): Promise<typeof mongoose>{
