@@ -23,8 +23,8 @@ exports.callbacks = {
         let nodePacket = new node_model_1.Node();
         let dateAux = new Date();
         let pld = payload.toString().split('|');
-        nodePacket.date = `${dateAux.getDate()}-${(dateAux.getMonth() + 1)}-${dateAux.getFullYear()}`;
-        nodePacket.hour = `${(dateAux.getHours())}:${dateAux.getMinutes()}`;
+        nodePacket.date = `${dateAux.getHours() > 20 ? (dateAux.getDate() - 1) : dateAux.getDate()}-${(dateAux.getMonth() + 1)}-${dateAux.getFullYear()}`;
+        nodePacket.hour = `${dateAux.getHours() > 20 ? dateAux.getHours() : (dateAux.getHours() - 3)}:${dateAux.getMinutes()}`;
         nodePacket.value = pld[0];
         nodePacket.latency = pld[1];
         console.log(`packet: ${nodePacket}`);
