@@ -1,12 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const restify = require("restify");
-const mqtt = require("mqtt");
 const mongoose = require("mongoose");
 const corsRestify = require("restify-cors-middleware");
 const EnvironmentData_1 = require("../commons/EnvironmentData");
-const StatusDisconnectCallback = () => console.log(`Desconectado: ${__filename}`);
-class Backend {
+class AppServer {
     constructor() {
         this.cors = corsRestify({
             origins: ["*"],
@@ -18,19 +16,6 @@ class Backend {
         return mongoose.connect(EnvironmentData_1.environment.db.url, {
             useNewUrlParser: true,
             useUnifiedTopology: true
-        });
-    }
-    initBroker() {
-        return new Promise((resolve, reject) => {
-            try {
-                this.broker = mqtt.connect(EnvironmentData_1.environment.broker.url);
-                this.broker.on('connect', () => {
-                    resolve(this.broker);
-                });
-            }
-            catch (error) {
-                reject(error);
-            }
         });
     }
     initServer(routes) {
@@ -62,11 +47,5 @@ class Backend {
             this.initServer(routes).then(() => this.server);
         });
     }
-    async exposeBroker() {
-        return this.initBroker().then(() => this.broker);
-    }
-    disconnectBroker(forced) {
-        return this.broker.end(forced, StatusDisconnectCallback);
-    }
 }
-exports.appBackend = new Backend();
+exports.appServer = new AppServer();
