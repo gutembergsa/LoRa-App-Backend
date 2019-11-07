@@ -1,12 +1,12 @@
 import {Server} from 'restify'
 import {Router} from '../commons/Router'
-import {Node} from '../models/node.model'
+import {temperatureCollection} from '../models/temperature.model'
 
 
 class FirstRoute extends Router{
     applyRoutes(server: Server){
         server.get('/first', (req, resp, next)=>{
-            Node.find().then(nodeData => {
+            temperatureCollection.find().then(nodeData => {
                 if (nodeData.length < 0) {
                     resp.send(404)
                     return next()
@@ -16,7 +16,7 @@ class FirstRoute extends Router{
             })
         })
         server.get('/first/:date', (req, resp, next)=>{
-            Node.find({
+            temperatureCollection.find({
                     'date':req.params.date
                 })
                 .then(nodeData => {
@@ -29,10 +29,10 @@ class FirstRoute extends Router{
             })
         })
         server.post('/first', (req, resp, next)=>{
-            let nodePacket = new Node(req.body)
+            let nodePacket = new temperatureCollection(req.body)
             let dateAux = new Date()
             nodePacket.date = dateAux.getDate() + "-" + (dateAux.getMonth() + 1) + "-" + dateAux.getFullYear();
-            nodePacket.hour = dateAux.getHours() + ":" + (dateAux.getMinutes() + 1);
+            nodePacket.hour = dateAux.getHours() + ":" + dateAux.getMinutes();
             nodePacket.save().then(()=>{
                 resp.send(204)
                 next()    
@@ -40,7 +40,7 @@ class FirstRoute extends Router{
         })
 
         server.del('/first/:date', (req, resp, next)=>{
-            Node.remove({'date': req.params.date}).exec().then(result => {
+            temperatureCollection.remove({'date': req.params.date}).exec().then(result => {
                 if (result.deletedCount) {
                     resp.send(204)
                     next()                    

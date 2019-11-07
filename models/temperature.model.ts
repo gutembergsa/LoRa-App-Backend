@@ -1,13 +1,13 @@
 import * as mongoose from 'mongoose'
 
-interface nodeInterface extends mongoose.Document {
+interface temperatureInterface extends mongoose.Document {
     value: string,
     latency:string,
     date: string,
     hour: string
 }
 
-const nodeSchema = new mongoose.Schema({
+const temperatureSchema = new mongoose.Schema({
     value: {
         type: String
     },
@@ -22,4 +22,4 @@ const nodeSchema = new mongoose.Schema({
     }
 })
 
-export const Node = mongoose.model<nodeInterface>('Node' , nodeSchema)
+export const temperatureCollection = mongoose.model<temperatureInterface>('Node' , temperatureSchema)

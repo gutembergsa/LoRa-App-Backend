@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const TopicActions_1 = require("../commons/TopicActions");
-const temperatureCallbacks_1 = require("./temperatureCallbacks");
+const temperatureCallbacks_1 = require("./callbacks/temperatureCallbacks");
 class TemperatureTopic extends TopicActions_1.TopicActions {
     constructor() {
         super(...arguments);

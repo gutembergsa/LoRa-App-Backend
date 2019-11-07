@@ -1,5 +1,5 @@
 import {Packet, ISubscriptionGrant} from 'mqtt'
-import {Node} from '../models/node.model'
+import {temperatureCollection} from '../../models/temperature.model'
 
 
 export const callbacks = {
@@ -21,13 +21,10 @@ export const callbacks = {
         console.log(`Subscribed: ${granted[0].topic}`)
     },
     temperatureIncomingMessage:  (topic: string , payload:Buffer, packet:Packet) =>{
-        let nodePacket = new Node()
-        let dateAux = new Date()
-        let pld = payload.toString().split('|');
-        nodePacket.date = `${dateAux.getDate()}-${(dateAux.getMonth() + 1)}-${dateAux.getFullYear()}`;
-        nodePacket.hour = `${(dateAux.getHours() - 3)}:${dateAux.getMinutes()}`;
-        nodePacket.value = pld[0]
-        nodePacket.latency = pld[1]
+        let pld = payload.toString().split('|')
+        let nodePacket = new temperatureCollection()
+        let dateAux = new Date();
+        [nodePacket.date, nodePacket.hour, nodePacket.value, nodePacket.latency] = [`${dateAux.getDate()}-${(dateAux.getMonth() + 1)}-${dateAux.getFullYear()}`, `${(dateAux.getHours() - 3)}:${dateAux.getMinutes()}`, pld[0], pld[1]]
         console.log(`packet: ${nodePacket}`)
         nodePacket.save().then(()=>{
             console.log(`Pub salva: ${topic}`)

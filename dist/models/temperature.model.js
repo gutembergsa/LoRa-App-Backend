@@ -1,15 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose = require("mongoose");
-const nodeSchema = new mongoose.Schema({
+const temperatureSchema = new mongoose.Schema({
     value: {
-        type: Number
+        type: String
     },
     latency: {
-        type: Number
+        type: String
     },
     date: {
-        type: Date.now()
+        type: String,
+    },
+    hour: {
+        type: String,
     }
 });
-exports.Node = mongoose.model('Node', nodeSchema);
+exports.temperatureCollection = mongoose.model('Node', temperatureSchema);
