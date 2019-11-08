@@ -22,4 +22,4 @@ const temperatureSchema = new mongoose.Schema({
     }
 })
 
-export const temperatureCollection = mongoose.model<temperatureInterface>('TemperatureTopic' , temperatureSchema)
+export const temperatureCollection = mongoose.model<temperatureInterface>('temperatureCollection' , temperatureSchema)

@@ -15,4 +15,4 @@ const temperatureSchema = new mongoose.Schema({
         type: String,
     }
 });
-exports.temperatureCollection = mongoose.model('TemperatureTopic', temperatureSchema);
+exports.temperatureCollection = mongoose.model('temperatureCollection', temperatureSchema);
