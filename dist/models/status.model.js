@@ -9,4 +9,4 @@ const statusSchema = new mongoose.Schema({
         type: String
     }
 });
-exports.statusCollection = mongoose.model('Node', statusSchema);
+exports.statusCollection = mongoose.model('StatusTopic', statusSchema);

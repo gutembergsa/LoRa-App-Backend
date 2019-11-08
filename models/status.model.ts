@@ -14,4 +14,4 @@ const statusSchema = new mongoose.Schema({
     }
 })
 
-export const statusCollection = mongoose.model<statusInterface>('Node' , statusSchema)
+export const statusCollection = mongoose.model<statusInterface>('StatusTopic' , statusSchema)

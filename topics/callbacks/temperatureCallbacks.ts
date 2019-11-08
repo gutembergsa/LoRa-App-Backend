@@ -24,7 +24,7 @@ export const callbacks = {
         let pld = payload.toString().split('|')
         let nodePacket = new temperatureCollection()
         let dateAux = new Date();
-        [nodePacket.date, nodePacket.hour, nodePacket.value, nodePacket.latency] = [`${dateAux.getDate()}-${(dateAux.getMonth() + 1)}-${dateAux.getFullYear()}`, `${(dateAux.getHours() - 3)}:${dateAux.getMinutes()}`, pld[0], pld[1]]
+        [nodePacket.date, nodePacket.hour, nodePacket.value, nodePacket.latency] = [`${dateAux.getDate()}-${(dateAux.getMonth() + 1)}-${dateAux.getFullYear()}`, `${(dateAux.getUTCHours() - 3)}:${dateAux.getMinutes()}`, pld[0], pld[1]]
         console.log(`packet: ${nodePacket}`)
         nodePacket.save().then(()=>{
             console.log(`Pub salva: ${topic}`)
