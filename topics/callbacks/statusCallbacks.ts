@@ -1,7 +1,7 @@
 import {Packet, ISubscriptionGrant} from 'mqtt'
 import {statusCollection} from '../../models/status.model'
 
-export const callbacks = {
+export const statusCallbacks = {
     StatusPublishCallback:(err: Error, packet: Packet) =>{
         if (err) {
             throw err

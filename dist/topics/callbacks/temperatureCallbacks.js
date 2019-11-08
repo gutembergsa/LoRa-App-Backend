@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const temperature_model_1 = require("../../models/temperature.model");
-exports.callbacks = {
+exports.tempCallbacks = {
     temperaturePublishCallback: (err, packet) => {
         if (err) {
             console.log(`Erro: ${err}`);

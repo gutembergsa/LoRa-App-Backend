@@ -2,7 +2,7 @@ import {Packet, ISubscriptionGrant} from 'mqtt'
 import {temperatureCollection} from '../../models/temperature.model'
 
 
-export const callbacks = {
+export const tempCallbacks = {
     temperaturePublishCallback: (err: Error, packet: Packet) =>{
         if (err) {
             console.log(`Erro: ${err}`)

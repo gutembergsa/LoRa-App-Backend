@@ -1,23 +1,23 @@
 import {TopicActions} from '../commons/TopicActions'
 import {MqttClient} from 'mqtt'
-import {callbacks} from './callbacks/temperatureCallbacks'
+import {tempCallbacks} from './callbacks/temperatureCallbacks'
 
 class TemperatureTopic extends TopicActions{
 
     private topic: string = 'temperatura'
 
     publish(broker: MqttClient, message: string){
-        return broker.publish(this.topic, message, callbacks.temperaturePublishCallback)
+        return broker.publish(this.topic, message, tempCallbacks.temperaturePublishCallback)
     }
     subscribe(broker: MqttClient){
-        broker.on('message', callbacks.temperatureIncomingMessage)
-        broker.subscribe(this.topic, callbacks.temperatureSubscribeCallback)
+        broker.on('message', tempCallbacks.temperatureIncomingMessage)
+        broker.subscribe(this.topic, tempCallbacks.temperatureSubscribeCallback)
         return broker
     }
     unsubscribe(broker: MqttClient){
         return setTimeout(() => {
             console.log(`topico unsub: ${this.topic}`)
-            return broker.unsubscribe(this.topic, callbacks.temperatureUnsubscribeCallback)  //Same callback type from Publish callback     
+            return broker.unsubscribe(this.topic, tempCallbacks.temperatureUnsubscribeCallback)  //Same callback type from Publish callback     
         }, 1000)
     }
 }

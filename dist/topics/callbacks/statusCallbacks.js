@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const status_model_1 = require("../../models/status.model");
-exports.callbacks = {
+exports.statusCallbacks = {
     StatusPublishCallback: (err, packet) => {
         if (err) {
             throw err;

@@ -8,16 +8,16 @@ class StatusTopic extends TopicActions_1.TopicActions {
         this.topic = 'ratings';
     }
     publish(broker, message) {
-        return broker.publish(this.topic, message, statusCallbacks_1.callbacks.StatusPublishCallback);
+        return broker.publish(this.topic, message, statusCallbacks_1.statusCallbacks.StatusPublishCallback);
     }
     subscribe(broker) {
-        broker.on('message', statusCallbacks_1.callbacks.StatusIncomingMessage);
-        return broker.subscribe(this.topic, statusCallbacks_1.callbacks.StatusSubscribeCallback);
+        broker.on('message', statusCallbacks_1.statusCallbacks.StatusIncomingMessage);
+        return broker.subscribe(this.topic, statusCallbacks_1.statusCallbacks.StatusSubscribeCallback);
     }
     unsubscribe(broker) {
         return setTimeout(() => {
             console.log(`topico unsub: ${this.topic}`);
-            broker.unsubscribe(this.topic, statusCallbacks_1.callbacks.StatusUnsubscribeCallback); //Same callback type from Publish callback     
+            broker.unsubscribe(this.topic, statusCallbacks_1.statusCallbacks.StatusUnsubscribeCallback); //Same callback type from Publish callback     
             return broker;
         }, 1000); //timeout to wait for on-flight packets before stop listen
     }
