@@ -8,7 +8,7 @@ exports.statusCallbacks = {
         }
         console.log(`Published: ${packet}`);
     },
-    StatusUnsubscribeCallback: (err, packet) => {
+    StatusUnsubscribeCallback: (err, _packet) => {
         if (err) {
             throw err;
         }
@@ -20,7 +20,7 @@ exports.statusCallbacks = {
         }
         console.log(`Subscribed: ${granted[0].topic}`);
     },
-    StatusIncomingMessage: (topic, payload, packet) => {
+    StatusIncomingMessage: (topic, payload, _packet) => {
         if (topic === 'ratings') {
             let pld = payload.toString().split('|');
             let nodePacket = new status_model_1.statusCollection();

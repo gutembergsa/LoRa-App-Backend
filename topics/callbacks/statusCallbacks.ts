@@ -9,7 +9,7 @@ export const statusCallbacks = {
         console.log(`Published: ${packet}`)
     },
     
-    StatusUnsubscribeCallback:(err: Error, packet: Packet) =>{
+    StatusUnsubscribeCallback:(err: Error, _packet: Packet) =>{
         if (err) {
             throw err
         }
@@ -24,7 +24,7 @@ export const statusCallbacks = {
         console.log(`Subscribed: ${granted[0].topic}`)
     },
     
-    StatusIncomingMessage:(topic: string, payload:Buffer, packet:Packet) =>{
+    StatusIncomingMessage:(topic: string, payload:Buffer, _packet:Packet) =>{
         if (topic === 'ratings') {
             let pld = payload.toString().split('|')
             let nodePacket = new statusCollection();
