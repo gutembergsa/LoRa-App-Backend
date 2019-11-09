@@ -4,12 +4,15 @@ import {temperatureCollection} from '../../models/temperature.model'
 const dateFunc = (date: Date): number  =>{
     console.log(`date.getHours(): ${date.getHours()}`)
     if (date.getHours() >= 0 || date.getHours() <= 2) {
+        if (date.getHours() === 1) {
+            return 1            
+        }
         return -21
     }
-    if ( date.getHours() == 3) {
+    if ( date.getHours() === 3) {
         return 0            
     }
-return 3
+    return 3
 }
 
 export const tempCallbacks = {
