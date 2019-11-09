@@ -2,10 +2,14 @@ import {Packet, ISubscriptionGrant} from 'mqtt'
 import {temperatureCollection} from '../../models/temperature.model'
 
 const dateFunc = (date: Date): number  =>{
-    if (date.getHours() >= 0 || date.getHours() <= 3) {
+    console.log(`date.getHours(): ${date.getHours()}`)
+    if (date.getHours() >= 0 || date.getHours() <= 2) {
         return -21
     }
-    return 3
+    if ( date.getHours() == 3) {
+        return 0            
+    }
+return 3
 }
 
 export const tempCallbacks = {

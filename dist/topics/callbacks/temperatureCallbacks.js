@@ -2,8 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const temperature_model_1 = require("../../models/temperature.model");
 const dateFunc = (date) => {
-    if (date.getHours() >= 0 || date.getHours() <= 3) {
+    console.log(`date.getHours(): ${date.getHours()}`);
+    if (date.getHours() >= 0 || date.getHours() <= 2) {
         return -21;
+    }
+    if (date.getHours() == 3) {
+        return 0;
     }
     return 3;
 };
