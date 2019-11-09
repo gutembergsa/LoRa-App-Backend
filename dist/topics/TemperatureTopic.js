@@ -11,8 +11,8 @@ class TemperatureTopic extends TopicActions_1.TopicActions {
         return broker.publish(this.topic, message, temperatureCallbacks_1.tempCallbacks.temperaturePublishCallback);
     }
     subscribe(broker) {
-        broker.on('message', temperatureCallbacks_1.tempCallbacks.temperatureIncomingMessage);
         broker.subscribe(this.topic, temperatureCallbacks_1.tempCallbacks.temperatureSubscribeCallback);
+        broker.on('message', temperatureCallbacks_1.tempCallbacks.temperatureIncomingMessage);
         return broker;
     }
     unsubscribe(broker) {

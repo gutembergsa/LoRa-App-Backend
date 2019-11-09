@@ -10,8 +10,8 @@ class TemperatureTopic extends TopicActions{
         return broker.publish(this.topic, message, tempCallbacks.temperaturePublishCallback)
     }
     subscribe(broker: MqttClient){
-        broker.on('message', tempCallbacks.temperatureIncomingMessage)
         broker.subscribe(this.topic, tempCallbacks.temperatureSubscribeCallback)
+        broker.on('message', tempCallbacks.temperatureIncomingMessage)
         return broker
     }
     unsubscribe(broker: MqttClient){
