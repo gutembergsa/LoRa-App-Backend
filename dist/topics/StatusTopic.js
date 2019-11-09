@@ -11,8 +11,8 @@ class StatusTopic extends TopicActions_1.TopicActions {
         return broker.publish(this.topic, message, statusCallbacks_1.statusCallbacks.StatusPublishCallback);
     }
     subscribe(broker) {
-        broker.subscribe(this.topic, statusCallbacks_1.statusCallbacks.StatusSubscribeCallback);
         broker.on('message', statusCallbacks_1.statusCallbacks.StatusIncomingMessage);
+        broker.subscribe(this.topic, statusCallbacks_1.statusCallbacks.StatusSubscribeCallback);
         return broker;
     }
     unsubscribe(broker) {

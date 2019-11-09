@@ -10,8 +10,8 @@ class StatusTopic extends TopicActions{
         return broker.publish(this.topic, message, statusCallbacks.StatusPublishCallback)
     }
     subscribe(broker:MqttClient){
-        broker.subscribe(this.topic, statusCallbacks.StatusSubscribeCallback)
         broker.on('message', statusCallbacks.StatusIncomingMessage)
+        broker.subscribe(this.topic, statusCallbacks.StatusSubscribeCallback)
         return broker
     }
     unsubscribe(broker:MqttClient){

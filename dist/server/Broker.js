@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const mqtt = require("mqtt");
 const EnvironmentData_1 = require("../commons/EnvironmentData");
+process.setMaxListeners(0);
 const StatusDisconnectCallback = () => console.log(`Desconectado: ${__filename}`);
 class AppBroker {
     initBroker() {
@@ -20,7 +21,12 @@ class AppBroker {
         });
     }
     async exposeBroker() {
-        return this.initBroker().then(() => this.broker);
+        return this.initBroker().then(broker => {
+            // broker.on('message', (topic)=>{
+            //     console.log('log broker class ', topic)
+            // })
+            return broker;
+        });
     }
     disconnectBroker(forced) {
         return this.broker.end(forced, StatusDisconnectCallback);
