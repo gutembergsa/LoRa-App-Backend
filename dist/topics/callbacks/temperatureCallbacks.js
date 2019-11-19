@@ -1,19 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const temperature_model_1 = require("../../models/temperature.model");
-const dateFunc = (date) => {
-    console.log(`date.getHours(): ${date.getHours()}`);
-    if (date.getHours() >= 0 || date.getHours() <= 2) {
-        if (date.getHours() === 1) {
-            return 1;
-        }
-        return -21;
-    }
-    if (date.getHours() === 3) {
-        return 0;
-    }
-    return 3;
-};
 exports.tempCallbacks = {
     temperaturePublishCallback: (err, packet) => {
         if (err) {
@@ -34,11 +21,12 @@ exports.tempCallbacks = {
     },
     temperatureIncomingMessage: (topic, payload, packet) => {
         if (topic === 'temperatura') {
-            let pld = payload.toString().split('|');
+            let pld = payload.toString().split('.');
+            let pld2 = pld[1].split('!');
             let nodePacket = new temperature_model_1.temperatureCollection();
             let dateAux = new Date();
-            [nodePacket.date, nodePacket.hour, nodePacket.value, nodePacket.latency] = [`${dateAux.getDate()}-${(dateAux.getMonth() + 1)}-${dateAux.getFullYear()}`, `${(dateAux.getHours() - dateFunc(dateAux))}:${dateAux.getMinutes()}`, pld[0], pld[1]];
-            console.log(`packet: ${nodePacket}`);
+            [nodePacket.date, nodePacket.hour, nodePacket.value, nodePacket.latency] = [`${dateAux.getDate()}-${(dateAux.getMonth() + 1)}-${dateAux.getFullYear()}`, pld2[0], pld[0], pld2[1]];
+            console.log(`Sending packet: ${nodePacket}`);
             nodePacket.save().then(() => {
                 console.log(`Pub salva: ${topic}`);
             });

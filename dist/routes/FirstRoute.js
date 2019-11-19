@@ -4,7 +4,7 @@ const Router_1 = require("../commons/Router");
 const temperature_model_1 = require("../models/temperature.model");
 class FirstRoute extends Router_1.Router {
     applyRoutes(server) {
-        server.get('/first', (req, resp, next) => {
+        server.get('/temptopic', (req, resp, next) => {
             temperature_model_1.temperatureCollection.find().then(nodeData => {
                 if (nodeData.length < 0) {
                     resp.send(404);
@@ -14,7 +14,7 @@ class FirstRoute extends Router_1.Router {
                 next();
             });
         });
-        server.get('/first/:date', (req, resp, next) => {
+        server.get('/temptopic/:date', (req, resp, next) => {
             temperature_model_1.temperatureCollection.find({
                 'date': req.params.date
             })
@@ -27,17 +27,7 @@ class FirstRoute extends Router_1.Router {
                 next();
             });
         });
-        server.post('/first', (req, resp, next) => {
-            let nodePacket = new temperature_model_1.temperatureCollection(req.body);
-            let dateAux = new Date();
-            nodePacket.date = dateAux.getDate() + "-" + (dateAux.getMonth() + 1) + "-" + dateAux.getFullYear();
-            nodePacket.hour = dateAux.getHours() + ":" + dateAux.getMinutes();
-            nodePacket.save().then(() => {
-                resp.send(204);
-                next();
-            });
-        });
-        server.del('/first/:date', (req, resp, next) => {
+        server.del('/temptopic/:date', (req, resp, next) => {
             temperature_model_1.temperatureCollection.remove({ 'date': req.params.date }).exec().then(result => {
                 if (result.deletedCount) {
                     resp.send(204);
@@ -49,4 +39,4 @@ class FirstRoute extends Router_1.Router {
         });
     }
 }
-exports.firstRoute = new FirstRoute();
+exports.tempRoute = new FirstRoute();

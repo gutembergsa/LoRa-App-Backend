@@ -1,12 +1,12 @@
 import {Server} from 'restify'
 import {Router} from '../commons/Router'
-import {temperatureCollection} from '../models/temperature.model'
+import {statusCollection} from '../models/status.model'
 
 
-class FirstRoute extends Router{
+class RatingRoute extends Router{
     applyRoutes(server: Server){
-        server.get('/temptopic', (req, resp, next)=>{
-            temperatureCollection.find().then(nodeData => {
+        server.get('/ratingtopic', (req, resp, next)=>{
+            statusCollection.find().then(nodeData => {
                 if (nodeData.length < 0) {
                     resp.send(404)
                     return next()
@@ -15,8 +15,8 @@ class FirstRoute extends Router{
                 next()
             })
         })
-        server.get('/temptopic/:date', (req, resp, next)=>{
-            temperatureCollection.find({
+        server.get('/ratingtopic/:date', (req, resp, next)=>{
+            statusCollection.find({
                     'date':req.params.date
                 })
                 .then(nodeData => {
@@ -28,8 +28,8 @@ class FirstRoute extends Router{
                 next()
             })
         })
-        server.del('/temptopic/:date', (req, resp, next)=>{
-            temperatureCollection.remove({'date': req.params.date}).exec().then(result => {
+        server.del('/ratingtopic/:date', (req, resp, next)=>{
+            statusCollection.remove({'date': req.params.date}).exec().then(result => {
                 if (result.deletedCount) {
                     resp.send(204)
                     next()                    
@@ -38,8 +38,9 @@ class FirstRoute extends Router{
                 return next()                    
             })
         })
+
     }
 }
 
-export const tempRoute = new FirstRoute();
+export const ratingRoute = new RatingRoute();
 

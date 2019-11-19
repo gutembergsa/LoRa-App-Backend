@@ -1,18 +1,19 @@
 import {appServer} from './server/Server'
-import {firstRoute} from './routes/FirstRoute'
+import {tempRoute} from './routes/FirstRoute'
+import {ratingRoute} from './routes/SecRoute'
 
+import {appBroker} from './server/Broker'
 import {temperatureTopic} from './topics/TemperatureTopic'
 import {statusTopic} from './topics/StatusTopic'
 
-import {appBroker} from './server/Broker'
 
 
-appServer.exposeServer([firstRoute]).then(() => {
+appServer.exposeServer([tempRoute, ratingRoute]).then(() => {
     appBroker.exposeBroker().then(broker => {
         temperatureTopic.subscribe(broker)
         statusTopic.subscribe(broker)
     })
-}).catch((erro)=> console.log(erro))
+}).catch(erro => console.log(erro))
 
 
 
