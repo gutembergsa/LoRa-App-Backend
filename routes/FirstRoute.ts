@@ -5,6 +5,10 @@ import {temperatureCollection} from '../models/temperature.model'
 
 class FirstRoute extends Router{
     applyRoutes(server: Server){
+        server.get('/', (req, resp, next)=>{
+            resp.send(200)
+            return next()
+        })
         server.get('/temptopic', (req, resp, next)=>{
             temperatureCollection.find().then(nodeData => {
                 if (nodeData.length < 0) {

@@ -4,6 +4,10 @@ const Router_1 = require("../commons/Router");
 const temperature_model_1 = require("../models/temperature.model");
 class FirstRoute extends Router_1.Router {
     applyRoutes(server) {
+        server.get('/', (req, resp, next) => {
+            resp.send(200);
+            return next();
+        });
         server.get('/temptopic', (req, resp, next) => {
             temperature_model_1.temperatureCollection.find().then(nodeData => {
                 if (nodeData.length < 0) {
