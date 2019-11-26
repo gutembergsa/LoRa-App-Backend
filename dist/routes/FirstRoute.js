@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Router_1 = require("../commons/Router");
 const temperature_model_1 = require("../models/temperature.model");
-class FirstRoute extends Router_1.Router {
+class TemperatureRoute extends Router_1.Router {
     applyRoutes(server) {
         server.get('/', (req, resp, next) => {
             resp.send(200);
@@ -10,23 +10,12 @@ class FirstRoute extends Router_1.Router {
         });
         server.get('/temptopic', (req, resp, next) => {
             temperature_model_1.temperatureCollection.find().then(nodeData => {
-                if (nodeData.length < 0) {
-                    resp.send(404);
-                    return next();
-                }
                 resp.json(nodeData);
                 next();
             });
         });
         server.get('/temptopic/:date', (req, resp, next) => {
-            temperature_model_1.temperatureCollection.find({
-                'date': req.params.date
-            })
-                .then(nodeData => {
-                if (nodeData.length < 0) {
-                    resp.send(404);
-                    return next();
-                }
+            temperature_model_1.temperatureCollection.find({ 'date': req.params.date }).then(nodeData => {
                 resp.json(nodeData);
                 next();
             });
@@ -43,4 +32,4 @@ class FirstRoute extends Router_1.Router {
         });
     }
 }
-exports.tempRoute = new FirstRoute();
+exports.tempRoute = new TemperatureRoute();

@@ -3,7 +3,7 @@ import {Router} from '../commons/Router'
 import {temperatureCollection} from '../models/temperature.model'
 
 
-class FirstRoute extends Router{
+class TemperatureRoute extends Router{
     applyRoutes(server: Server){
         server.get('/', (req, resp, next)=>{
             resp.send(200)
@@ -11,23 +11,12 @@ class FirstRoute extends Router{
         })
         server.get('/temptopic', (req, resp, next)=>{
             temperatureCollection.find().then(nodeData => {
-                if (nodeData.length < 0) {
-                    resp.send(404)
-                    return next()
-                }
                 resp.json(nodeData)
                 next()
             })
         })
         server.get('/temptopic/:date', (req, resp, next)=>{
-            temperatureCollection.find({
-                    'date':req.params.date
-                })
-                .then(nodeData => {
-                if (nodeData.length < 0) {
-                    resp.send(404)
-                    return next()
-                }
+            temperatureCollection.find({'date':req.params.date}).then(nodeData => {
                 resp.json(nodeData)
                 next()
             })
@@ -45,5 +34,5 @@ class FirstRoute extends Router{
     }
 }
 
-export const tempRoute = new FirstRoute();
+export const tempRoute = new TemperatureRoute();
 
