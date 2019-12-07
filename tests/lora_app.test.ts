@@ -8,17 +8,19 @@ let broker:mqtt.MqttClient
 test('ping servidor', async ()=>{
     return request('https://mongo-lora-gutem.herokuapp.com')
     .get('/')
-    .then(resp =>{
-        expect(resp.status).toBe(200)
-    })
+    .then(resp => expect(resp.status).toBe(200))
     .catch(fail)
 })
 
 test('teste de integridade dos pacotes HTTP', async ()=>{
-    return request('https://mongo-lora-gutem.herokuapp.com')
+    return request('http://localhost:3000')
     .get('/temptopic')
     .then(resp =>{
-        expect(resp).toHaveProperty('data')
+        const data = JSON.parse(resp.text)
+        expect(data[data.length - 1]).toHaveProperty('hour')
+        expect(data[data.length - 1]).toHaveProperty('date')
+        expect(data[data.length - 1]).toHaveProperty('latency')
+        expect(data[data.length - 1]).toHaveProperty('value')
     })
     .catch(fail)
 })
@@ -28,11 +30,7 @@ test('ping broker', ()=> {
     broker = mqtt.connect(environment.broker.url,{
         clientId: 'BackLoraGutem'
     })
-    broker.on('connect', () => {
-        expect(broker.connected).toBe(true)
-    })      
+    broker.on('connect', () => expect(broker.connected).toBe(true))      
 })
 
-afterAll(()=>{
-    broker.end(true)
-})
+afterAll(()=> broker.end(true))
