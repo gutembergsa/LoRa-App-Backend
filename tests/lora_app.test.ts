@@ -13,7 +13,7 @@ test('ping servidor', async ()=>{
 })
 
 test('teste de integridade dos pacotes HTTP', async ()=>{
-    return request('http://localhost:3000')
+    return request('https://mongo-lora-gutem.herokuapp.com')
     .get('/temptopic')
     .then(resp =>{
         const data = JSON.parse(resp.text)
