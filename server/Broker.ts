@@ -27,12 +27,7 @@ class AppBroker{
     
 
     async exposeBroker(): Promise<mqtt.MqttClient>{
-        return this.initBroker().then(broker => {
-            // broker.on('message', (topic)=>{
-            //     console.log('log broker class ', topic)
-            // })
-            return broker
-        })
+        return this.initBroker().then(broker =>  broker)
     }
 
     disconnectBroker(forced:boolean): mqtt.MqttClient{

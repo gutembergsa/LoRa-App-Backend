@@ -21,12 +21,7 @@ class AppBroker {
         });
     }
     async exposeBroker() {
-        return this.initBroker().then(broker => {
-            // broker.on('message', (topic)=>{
-            //     console.log('log broker class ', topic)
-            // })
-            return broker;
-        });
+        return this.initBroker().then(broker => broker);
     }
     disconnectBroker(forced) {
         return this.broker.end(forced, StatusDisconnectCallback);
